@@ -1,0 +1,51 @@
+/* src/components/QuizQuestion.css */
+
+/* Question Container */
+.quiz-question-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Reduced from 1rem */
+  width: 100%;
+}
+
+/* Question Text */
+.question-text {
+  margin:0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin: 0;
+  padding: 0;
+}
+
+/* Options Container */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%; /* Fixed your "10 0%" typo */
+}
+
+/* Option Buttons */
+.option-btn {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.option-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.option-btn:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}

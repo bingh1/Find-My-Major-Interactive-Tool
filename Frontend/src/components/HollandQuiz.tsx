@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { questions, type RiasecType } from '../data/types';
+import { questions, options, type RiasecType } from '../data/types';
+import QuizCheckpoint from './QuizCheckpoint';
+import { QuizQuestion } from './QuizQuestion';
+import './HollandQuiz.css';
 
 export default function HollandQuiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -7,43 +10,110 @@ export default function HollandQuiz() {
     R: 0, I: 0, A: 0, S: 0, E: 0, C: 0
   });
   const [showResults, setShowResults] = useState(false);
+  const [isCheckpoint, setIsCheckpoint] = useState(false);
 
   const currentQuestion = questions[currentIndex];
-  const progress = ((currentIndex) / questions.length) * 100;
+  const questionsUntilCheckpoint = 6;
+  
+  // For checkpoint screen, show previous checkpoint numbers (e.g., 6/6)
+  const displayIndex = isCheckpoint ? currentIndex : currentIndex + 1;
+  const displayCheckpoint = isCheckpoint 
+    ? Math.floor(currentIndex / questionsUntilCheckpoint) * questionsUntilCheckpoint
+    : Math.ceil((currentIndex + 1) / questionsUntilCheckpoint) * questionsUntilCheckpoint;
+  
+  // Progress bar should show completed questions out of checkpoint
+  const progressPercentage = (currentIndex / displayCheckpoint) * 100;
 
-  // Inside your HollandQuiz component
   const handleAnswer = (weight: number) => {
-    // Add the specific weight (1-5) to the current category score
+    // Update scores
     setScores(prev => ({
       ...prev,
       [currentQuestion.type]: prev[currentQuestion.type] + weight
     }));
 
-    // Move to next question
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else {
+    const nextIndex = currentIndex + 1;
+
+    // Check if quiz is complete
+    if (nextIndex >= questions.length) {
       setShowResults(true);
+      return;
+    }
+
+    // Check if we hit a checkpoint (every 6 questions)
+    if (nextIndex % 6 === 0) {
+      setCurrentIndex(nextIndex);
+      setIsCheckpoint(true);
+    } else {
+      setCurrentIndex(nextIndex);
     }
   };
 
+  const handleContinue = () => {
+    setIsCheckpoint(false);
+  };
+
   if (showResults) {
-    return <div>Your top score is: {Object.entries(scores).sort((a,b) => b[1] - a[1])[0][0]}</div>;
+    const topTrait = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+    
+    return (
+      <div className="holland-quiz-container results-view">
+        {/* Progress Header */}
+        <div className="canvas-header">
+          <div className="stat">
+            <span className="label">
+              QUESTION {currentIndex} / {currentIndex}
+            </span>
+            <div className="progress-track">
+              <div 
+                className="progress-fill" 
+                style={{ width: '100%' }} 
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div className="mod-card" style={{ borderRadius: '12px' }}>
+          <h2>Evaluation Complete</h2>
+          <p>Primary Archetype: <strong style={{ color: 'var(--accent-primary)' }}>{topTrait}</strong></p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div style={{ maxWidth: '500px', margin: 'auto', padding: '20px' }}>
-      {/* Progress Bar */}
-      <div style={{ width: '100%', backgroundColor: '#eee', height: '10px', borderRadius: '5px', marginBottom: '20px' }}>
-        <div style={{ width: `${progress}%`, background: 'blue', height: '100%', transition: '0.3s' }} />
+    <div className="holland-quiz-container">
+      
+      {/* Progress Header */}
+      <div className="canvas-header">
+        <div className="stat">
+          <span className="label">
+            QUESTION {displayIndex} / {displayCheckpoint}
+          </span>
+          <div className="progress-track">
+            <div 
+              className="progress-fill" 
+              style={{ width: `${progressPercentage}%` }} 
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Question Card */}
-      <div style={{ border: '1px solid #ddd', padding: '40px', borderRadius: '12px', textAlign: 'center' }}>
-        <h2>{currentQuestion.text}</h2>
-        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-          <button onClick={() => handleAnswer(false)}>No</button>
-          <button onClick={() => handleAnswer(true)}>Yes / Next</button>
+      {/* Main Content Area */}
+      <div className="mod-card">
+        <div className="card-main">
+          {isCheckpoint ? (
+            <QuizCheckpoint 
+              scores={scores} 
+              onContinue={handleContinue}
+              onExplore={() => console.log("Exploring with scores:", scores)}
+            />
+          ) : (
+            <QuizQuestion 
+              question={currentQuestion} 
+              options={options}
+              onAnswer={handleAnswer} 
+            />
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,84 @@
+/* src/components/HollandQuiz.css */
+
+/* Main container - fills viewport with dark background */
+/* Main container - centered content with dark background */
+.holland-quiz-container {
+  width: 80vw;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Header & Progress Area */
+.canvas-header {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+  border-radius: 12px 12px 0 0;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.progress-track {
+  flex: 1;
+  background: var(--bg-input);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent-primary);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+/* Main Quiz Card */
+.mod-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-height: calc(100vh - 7rem); /* More flexible using rem units */
+  overflow-y: auto;
+}
+
+/* Card inner content wrapper */
+.card-main {
+  width: 100%;
+}
+
+/* Footer Stats */
+.export-footer {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.text-muted {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}

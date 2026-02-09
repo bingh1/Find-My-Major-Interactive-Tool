@@ -1,0 +1,81 @@
+.checkpoint-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.checkpoint-header .type-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.checkpoint-header h2 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.results-preview p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.leading-badge {
+  font-family: 'JetBrains Mono', monospace; /* Scientific look */
+  font-size: 1.75rem;
+  font-weight: 800;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: rgba(0, 255, 204, 0.05); /* Slight tint of accent-primary */
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.checkpoint-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.checkpoint-actions button {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn {
+  background: var(--accent-primary);
+  color: #000;
+  border: none;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-muted);
+}
