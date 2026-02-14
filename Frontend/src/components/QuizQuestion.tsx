@@ -1,4 +1,4 @@
-import { type Question, type Option } from '../data/types'; 
+import { type Question, type Option } from '../data/types';
 import './QuizQuestion.css';
 
 interface Props {
@@ -11,7 +11,7 @@ export const QuizQuestion = ({ question, options, onAnswer }: Props) => {
   return (
     <div className="quiz-question-inner">
       <p className="question-text">{question.text}</p>
-      
+
       <div className="options-list">
         {options.map((opt) => (
           <button

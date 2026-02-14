@@ -27,7 +27,7 @@ export default function QuizCheckpoint({ scores, onContinue, onExplore }: QuizCh
         <span className="type-tag">CHECKPOINT</span>
         <h2>Progress Report</h2>
       </div>
-      
+
       <div className="results-preview">
         <p>Based on your progress, you're showing a strong affinity for:</p>
         <div className="leading-badge">
@@ -36,15 +36,15 @@ export default function QuizCheckpoint({ scores, onContinue, onExplore }: QuizCh
       </div>
 
       <div className="checkpoint-actions">
-        <button 
-            className="secondary-btn" 
+        <button
+            className="secondary-btn"
             onClick={onExplore}
             style={{ background: 'blue', color: 'white', padding: '10px' }}
         >
             EXPLORE MAJORS
         </button>
-        <button 
-            className="primary-btn" 
+        <button
+            className="primary-btn"
             onClick={onContinue}
             style={{ background: 'green', color: 'white', padding: '10px' }}
         >

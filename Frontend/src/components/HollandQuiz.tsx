@@ -14,13 +14,13 @@ export default function HollandQuiz() {
 
   const currentQuestion = questions[currentIndex];
   const questionsUntilCheckpoint = 6;
-  
+
   // For checkpoint screen, show previous checkpoint numbers (e.g., 6/6)
   const displayIndex = isCheckpoint ? currentIndex : currentIndex + 1;
-  const displayCheckpoint = isCheckpoint 
+  const displayCheckpoint = isCheckpoint
     ? Math.floor(currentIndex / questionsUntilCheckpoint) * questionsUntilCheckpoint
     : Math.ceil((currentIndex + 1) / questionsUntilCheckpoint) * questionsUntilCheckpoint;
-  
+
   // Progress bar should show completed questions out of checkpoint
   const progressPercentage = (currentIndex / displayCheckpoint) * 100;
 
@@ -54,7 +54,7 @@ export default function HollandQuiz() {
 
   if (showResults) {
     const topTrait = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-    
+
     return (
       <div className="holland-quiz-container results-view">
         {/* Progress Header */}
@@ -64,14 +64,14 @@ export default function HollandQuiz() {
               QUESTION {currentIndex} / {currentIndex}
             </span>
             <div className="progress-track">
-              <div 
-                className="progress-fill" 
-                style={{ width: '100%' }} 
+              <div
+                className="progress-fill"
+                style={{ width: '100%' }}
               />
             </div>
           </div>
         </div>
-        
+
         <div className="mod-card" style={{ borderRadius: '12px' }}>
           <h2>Evaluation Complete</h2>
           <p>Primary Archetype: <strong style={{ color: 'var(--accent-primary)' }}>{topTrait}</strong></p>
@@ -82,7 +82,7 @@ export default function HollandQuiz() {
 
   return (
     <div className="holland-quiz-container">
-      
+
       {/* Progress Header */}
       <div className="canvas-header">
         <div className="stat">
@@ -90,9 +90,9 @@ export default function HollandQuiz() {
             QUESTION {displayIndex} / {displayCheckpoint}
           </span>
           <div className="progress-track">
-            <div 
-              className="progress-fill" 
-              style={{ width: `${progressPercentage}%` }} 
+            <div
+              className="progress-fill"
+              style={{ width: `${progressPercentage}%` }}
             />
           </div>
         </div>
@@ -102,16 +102,16 @@ export default function HollandQuiz() {
       <div className="mod-card">
         <div className="card-main">
           {isCheckpoint ? (
-            <QuizCheckpoint 
-              scores={scores} 
+            <QuizCheckpoint
+              scores={scores}
               onContinue={handleContinue}
               onExplore={() => console.log("Exploring with scores:", scores)}
             />
           ) : (
-            <QuizQuestion 
-              question={currentQuestion} 
+            <QuizQuestion
+              question={currentQuestion}
               options={options}
-              onAnswer={handleAnswer} 
+              onAnswer={handleAnswer}
             />
           )}
         </div>
